@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.UI;
 public class Spawner : MonoBehaviour
 {
     public GameObject ob1;
@@ -9,17 +9,21 @@ public class Spawner : MonoBehaviour
     public float spawngap = 5;
     public float x = 7;
     float nxtst;
-    int count;
+    public int count;
+    public Text scoreText;
+    
     // Start is called before the first frame update
     void Start()
-    { }
+    {
+        scoreText=GetComponent<Text>();
+    }
 
     // Update is called once per frame
     void Update()
     {
         if (Time.time > nxtst)
         {
-            int no;
+            int no;     
             no = Random.Range(1,100);
             nxtst = Time.time + spawngap;
             Vector3 spawnpos = new Vector3(Random.Range(-x, x), 10, 0);
@@ -33,8 +37,13 @@ public class Spawner : MonoBehaviour
             }
             count++;
             print("count=" +count);
-            
+            DisplayScore();
         }
+    }
+    void DisplayScore()
+    {
+        
+        scoreText.text="Score: " + count.ToString();
     }
 }
 
